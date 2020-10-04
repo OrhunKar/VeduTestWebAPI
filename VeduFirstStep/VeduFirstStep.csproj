@@ -276,7 +276,8 @@
     <Content Include="Models\DBModels.edmx.diagram">
       <DependentUpon>DBModels.edmx</DependentUpon>
     </Content>
-    <None Include="Properties\PublishProfiles\VeduFirstStep20201002122917 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\VeduFirstStep20201004044314 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\VeduFirstStep20201004050047 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
