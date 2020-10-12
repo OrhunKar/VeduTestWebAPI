@@ -35,6 +35,28 @@ namespace VeduFirstStep.Controllers
             return Ok(aDMIN);
         }
 
+        [Route("api/ADMINs/Users/{name}")]
+        public Boolean Get(string name)
+        {
+            using (var ctx = db)
+            {
+                var userList = ctx.Database.SqlQuery<string>(@"SELECT S.Sname 
+                                                                    FROM [dbo].[Student] as S
+                                                                    Union
+                                                                    SELECT T.Tname 
+                                                                    FROM [dbo].[Teacher] as T
+                                                                    Union
+                                                                    SELECT A.Aname 
+                                                                    FROM [dbo].[ADMIN] as A")
+                                     .ToList<string>();
+                if( userList.Contains(name))
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+
         // PUT: api/ADMINs/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutADMIN(int id, ADMIN aDMIN)
