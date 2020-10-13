@@ -34,7 +34,7 @@ namespace VeduFirstStep.Controllers
 
             return Ok(teacher);
         }
-
+        /*
         [Route("api/Teachers/Courses")]
         public List<Course> Get()
         {
@@ -44,6 +44,20 @@ namespace VeduFirstStep.Controllers
                                                                 FROM dbo.Course 
                                                                 INNER JOIN dbo.Teacher ON dbo.Course.CID = dbo.Teacher.CourseID 
                                                                 Where Tname = 'EnglishTestTeacher'")
+                                     .ToList<Course>();
+                return courseList;
+            }
+        }
+        */
+        [Route("api/Teachers/{teacherName}/Courses")]
+        public List<Course> Get(string teacherName)
+        {
+            using (var ctx = db)
+            {
+                var courseList = ctx.Database.SqlQuery<Course>(@"SELECT dbo.Course.*
+                                                                FROM dbo.Course 
+                                                                INNER JOIN dbo.Teacher ON dbo.Course.CID = dbo.Teacher.CourseID 
+                                                                Where Tname = '" + teacherName + "'")
                                      .ToList<Course>();
                 return courseList;
             }
