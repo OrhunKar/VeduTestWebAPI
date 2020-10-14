@@ -36,24 +36,32 @@ namespace VeduFirstStep.Controllers
         }
 
         [Route("api/ADMINs/Users/{name}")]
-        public Boolean Get(string name)
+        public String Get(string name)
         {
             using (var ctx = db)
             {
-                var userList = ctx.Database.SqlQuery<string>(@"SELECT S.Sname 
-                                                                    FROM [dbo].[Student] as S
-                                                                    Union
-                                                                    SELECT T.Tname 
-                                                                    FROM [dbo].[Teacher] as T
-                                                                    Union
-                                                                    SELECT A.Aname 
-                                                                    FROM [dbo].[ADMIN] as A")
+                var studentUserList = ctx.Database.SqlQuery<string>(@"SELECT S.Sname 
+                                                                    FROM [dbo].[Student] as S")
                                      .ToList<string>();
-                if( userList.Contains(name))
+                if(studentUserList.Contains(name))
                 {
-                    return true;
+                    return "student";
                 }
-                return false;
+                var teacherUserList = ctx.Database.SqlQuery<string>(@"SELECT T.Tname 
+                                                                    FROM [dbo].[Teacher] as T")
+                                     .ToList<string>();
+                if (teacherUserList.Contains(name))
+                {
+                    return "teacher";
+                }
+                var adminList = ctx.Database.SqlQuery<string>(@"SELECT A.Aname 
+                                                               FROM [dbo].[ADMIN] as A")
+                                     .ToList<string>();
+                if (adminList.Contains(name))
+                {
+                    return "admin";
+                }
+                return "notValid";
             }
         }
 
