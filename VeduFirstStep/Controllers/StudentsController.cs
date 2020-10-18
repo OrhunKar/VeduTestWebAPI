@@ -35,17 +35,16 @@ namespace VeduFirstStep.Controllers
             return Ok(student);
         }
 
-        [Route("api/Students/Courses")]
-        public List<Course> Get()
+        [Route("api/Students/{Sname}")]
+        public List<Student> Get(String Sname)
         {
             using (var ctx = db)
             {
-                var courseList = ctx.Database.SqlQuery<Course>(@"SELECT dbo.Course.*
-                                                        FROM dbo.Course 
-                                                        INNER JOIN dbo.Student ON dbo.Course.CID = dbo.Student.CourseID 
-                                                        Where Sname = 'DemoTestStudent'")
-                                     .ToList<Course>();
-                return courseList;
+                var student = ctx.Database.SqlQuery<Student>(@"SELECT * 
+                                                                FROM [dbo].[Student]
+                                                                Where Sname = '" + Sname + "'")
+                                     .ToList<Student>();
+                return student;
             }
         }
 

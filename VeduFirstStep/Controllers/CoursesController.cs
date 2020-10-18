@@ -35,6 +35,20 @@ namespace VeduFirstStep.Controllers
             return Ok(course);
         }
 
+        [Route("api/Courses/{Sname}")]
+        public List<Course> Get(String Sname)
+        {
+            using (var ctx = db)
+            {
+                var courseList = ctx.Database.SqlQuery<Course>(@"SELECT dbo.Course.*
+                                                        FROM dbo.Course 
+                                                        INNER JOIN dbo.Student ON dbo.Course.CID = dbo.Student.CourseID 
+                                                        Where Sname = '" + Sname + "'")
+                                     .ToList<Course>();
+                return courseList;
+            }
+        }
+
         // PUT: api/Courses/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutCourse(int id, Course course)
