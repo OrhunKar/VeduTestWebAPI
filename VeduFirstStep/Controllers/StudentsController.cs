@@ -35,7 +35,7 @@ namespace VeduFirstStep.Controllers
             return Ok(student);
         }
 
-        [Route("api/Students/{Sname}")]
+        [Route("api/Students/{Sname}/All")]
         public List<Student> Get(String Sname)
         {
             using (var ctx = db)
